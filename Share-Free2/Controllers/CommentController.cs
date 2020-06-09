@@ -1,0 +1,70 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Share_Free.Domain;
+using Share_Free.Services;
+
+namespace Share_Free.Controllers
+{
+    [Authorize]
+    public class CommentController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ModifyComment([FromForm] string message, [FromForm] int commentId)
+        {
+            CommentService cService = new CommentService();
+            string username = HttpContext.User.FindFirst("Username").Value.ToString();
+            List<Comment> userComments = cService.GetAllCommentsFromUser(username);
+            foreach (var comment in userComments)
+            {
+                if (username == comment.Username && commentId == comment.Id)
+                {
+                    cService.ModifyComment(message, commentId);
+                    break;
+                }
+            }
+
+            return RedirectToAction("Index", "Home");
+
+        }
+
+        [HttpPost]
+        public IActionResult CreateComment([FromForm(Name = "message")] string message, [FromForm(Name = "postId")] int postId)
+        {
+            // username missing
+            CommentService cService = new CommentService();
+            string username = HttpContext.User.FindFirst("Username").Value.ToString();
+            cService.CreateComment(username, message, postId);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        [HttpPost]
+        public IActionResult DeleteComment([FromForm] int commentId)
+        {
+            CommentService cService = new CommentService();
+            string username = HttpContext.User.FindFirst("Username").Value.ToString();
+            List<Comment> userComments = cService.GetAllCommentsFromUser(username);
+            foreach (var comment in userComments)
+            {
+                if (username == comment.Username && commentId == comment.Id)
+                {
+                    cService.DeleteComment(commentId);
+                    break;
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+
+    }
+}

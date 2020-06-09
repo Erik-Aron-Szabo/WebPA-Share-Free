@@ -1,0 +1,127 @@
+﻿@model PostModelList
+<head>
+    <script src="~/js/site.js" defer></script>
+</head>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+@using Share_Free.Services
+@using Sharing_Free.Domain
+<!--Search bar-->
+<h3>Welcome!</h3>
+
+<!-- The Posts -->
+<h1>Posts</h1>
+<h5>New Post</h5>
+<div class="createpost">
+    <form asp-controller="Home" asp-action="CreatePost" method="post">
+        <label>Title:</label>
+        <input type="text" name="title" />
+
+        <label>Description:</label>
+        <input type="text" name="description" />
+
+        <input type="submit" value="CreatePost" />
+
+    </form>
+</div>
+<h5>Delete Post</h5>
+<div>
+    <form asp-controller="Post" asp-action="DeletePost" method="post">
+        <label>ID:</label>
+        <input type="number" name="postId" />
+        <input type="submit" value="Delete Post" />
+    </form>
+</div>
+<h5>Modify Post</h5>
+<div>
+    <form asp-controller="Post" asp-action="ModifyPost" method="post">
+        <label>ID:</label>
+        <input type="number" name="postId" />
+        <label>Title:</label>
+        <input type="text" name="title" />
+        <label>Description:</label>
+        <input type="text" name="description" />
+
+        <input type="submit" value="Modify Post" />
+    </form>
+</div>
+<div class="post-container">
+    <ul class="list-posts">
+        @{
+            PostService pService = new PostService();
+            List<Post> allPosts = pService.GetAllPosts();
+            CommentService cService = new CommentService();
+            var allComments = cService.GetAllComments();
+            foreach (var post in allPosts)
+            {
+                <li>
+                    <h2>@post.Title</h2>
+                    <p>
+                        @post.Description
+                    </p>
+                    <p>
+                        <small>By: @post.Username @post.Date</small>
+
+                    </p>
+                    <h3>Comments:</h3>
+                    <ul class="list-comments">
+                        @{
+
+                            foreach (var comment in allComments)
+                            {
+                                if (comment.Post_Id == post.Id)
+                                {
+                                    <li>
+                                        <h4>[@comment.Username] [ @comment.Id ]</h4>
+                                        <p><small>@comment.Message @comment.Date</small></p>
+                                        @*<input type="number" name="commentId" value="@comment.Id" hidden id="getCommentId" />
+                                            <input type="text" name="username" value="@comment.Username" hidden id="getCommentUsername" />
+                                            <input type="datetime" name="commentDate" value="@comment.Date" hidden id="getCommentDate" />*@
+                                    </li>
+                                }
+                            }
+                        }
+                    </ul>
+
+                    <h5>New Comment</h5>
+                    <div>
+                        <form asp-controller="Comment" asp-action="CreateComment" method="post">
+                            <label>Message:</label>
+                            <input type="text" name="message" />
+                            <input type="number" name="postId" hidden value="@post.Id" /> @*passing postId to controller*@
+
+                            <input type="submit" value="CreateMessage" />
+                        </form>
+                    </div>
+
+                    <h5>Delete Comment</h5>
+                    <div>
+                        <form asp-controller="Comment" asp-action="DeleteComment" method="post">
+                            <label>ID:</label>
+                            <input type="number" name="commentId" />
+                            <input type="submit" value="Delete Comment" />
+                        </form>
+                    </div>
+
+                    <h5>Modify Comment</h5>
+                    <div>
+                        <form asp-controller="Comment" asp-action="ModifyComment" method="post">
+                            <label>ID:</label>
+                            <input type="number" name="commentId" />
+                            <label>Message:</label>
+                            <input type="text" name="message" />
+
+                            <input type="submit" value="Modify Comment" />
+                        </form>
+                    </div>
+                </li>
+            }
+        }
+    </ul>
+</div>
+
+
+
+

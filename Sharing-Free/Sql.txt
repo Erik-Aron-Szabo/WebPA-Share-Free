@@ -1,0 +1,105 @@
+drop table if exists "user" cascade;
+drop table if exists post cascade;
+drop table if exists "comment" cascade;
+drop table if exists "group" cascade;
+drop table if exists user_reports cascade;
+
+
+--user
+create table "user"(
+	email varchar(50) primary key,
+	"password" varchar(32),
+	username varchar(18),
+	banned boolean
+
+);
+
+
+
+
+--post
+create table post(
+	"id" serial primary key,
+	username varchar(18) references "user"(username),
+	title varchar(20),
+	description text,
+	date timestamp,
+	comment_id int references "comment"("id")
+);
+
+
+
+--comment
+create table "comment"(
+	"id" serial primary key,
+	username varchar(18) references "user"(username),
+	"message" text,
+	date timestamp
+ );
+
+
+--group
+create table "group"(
+	"id" serial primary key,
+	"name" varchar(18),
+	username varchar(18) references "user"(username)
+);
+
+
+--user_reports
+create table user_reports (
+	reporter int references "user"(email),
+	reported int references "user"(email),
+	reason text,
+	date timestamp
+);
+
+
+-- inserting 
+insert into "user"(email, "password", username, banned)
+values ('erik@erik.com', 'erik', 'Erik121', false);
+insert into "user"(email, "password", username, banned)
+values ('peter@peter.com', 'peter', 'Peter', false);
+insert into "user"(email, "password", username, banned)
+values ('admin@admin.com', 'admin', 'Admin', false);
+
+
+--POSTS
+insert into post(username, title, description, date)
+values ('Erik121', 'Open the eyes of the blind', 'That was His ministry', 2020-06-01 13:10:00);
+insert into post(username, title, description, date)
+values ('Erik121', 'Bind up the brokenhearted', 'That was His ministry', 2020-06-02 13:10:00);
+insert into post(username, title, description, date)
+values ('Erik121', 'Release the prisoners', 'That was His ministry', 2020-06-03 13:10:00);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

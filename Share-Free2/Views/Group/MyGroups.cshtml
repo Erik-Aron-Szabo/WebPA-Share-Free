@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "MyGroups";
+}
+@using Sharing_Free.Services;
+@using Share_Free.Domain;
+@using Microsoft.AspNetCore.Http;
+@using Share_Free.Controllers;
+<head>
+    <script src="~/js/Group.js" defer></script>
+</head>
+@{GroupService gService = new GroupService(); }
+<div>
+    <h2>MyGroups</h2>
+    <ul>
+        @{
+            // I don't know how to list all the groups, where the user is in
+
+            int userId = Convert.ToInt32(Context.User.FindFirst("Id").Value.ToString());
+            List<UserGroup> myGroups = gService.UserGroups(userId); 
+            // HIBA - 0 count
+
+            foreach (var group in myGroups)
+            {
+                <li>
+                    <p>Group Name: @group.GroupName</p>
+                </li>
+            }
+        }
+    </ul>
+</div>
+
+<div>
+    <h2>Available Groups</h2>
+
+    <ul>
+
+        @{
+            List<Group> availableGroups = gService.GetAllGroups();
+            int userId2 = Convert.ToInt32(Context.User.FindFirst("Id").Value.ToString());
+            foreach (var group in availableGroups)
+            {
+                <li>
+                    <p>Group Name: @group.Name</p>
+                    <input id="groupId" type="number" name="groupId" value="@group.Id" hidden /> @*Doesn't show correct groupId*@
+                    <input id="userId" type="number" name="userId" value="@userId2" hidden />
+                    <button onclick="joinGroup()">Join Group</button>
+                </li>
+        }
+
+        }
+    </ul>
+</div>
+
+@{ /* Join group = button, onclick -> XHR(POST) -> insert username
+     * into group table (POSTGRES)
+     * refresh my groups, or the page, and it will show user joined
+     * in the choosen group
+     --------------------------------------------------------
+     Same with Leave group,
+     button (leave) onclick -> XHR (POST) -> delete from group,
+     where username = @username? Can this work in an ARRAY?
+     */
+}
+

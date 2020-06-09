@@ -1,0 +1,48 @@
+DROP TABLE IF EXISTS "user" CASCADE;
+DROP TABLE IF EXISTS post CASCADE;
+DROP TABLE IF EXISTS "comment" CASCADE;
+DROP TABLE IF EXISTS user_reports CASCADE;
+DROP TABLE IF EXISTS "group" CASCADE;
+
+
+CREATE TABLE "user" (
+	email varchar(50) PRIMARY KEY,
+	"password" varchar(32),
+	username varchar(20),
+	banned boolean
+
+);
+
+CREATE TABLE post (
+	"id" SERIAL PRIMARY KEY,
+	username varchar(20) REFERENCES "user"(username),
+	title varchar(32),
+	description text,
+	date TIMESTAMP,
+	comment_id int REFERENCES "comment"("id")
+
+);
+
+CREATE TABLE "comment"(
+	"id" SERIAL PRIMARY KEY,
+	username varchar(20) REFERENCES "user"(username),
+	"message" text,
+	date TIMESTAMP
+
+);
+
+CREATE TABLE "group" (
+	"id" SERIAL PRIMARY KEY,
+	"name" varchar(17),
+	username varchar(20) REFERENCES "user"(username)
+);
+
+create table user_reports(
+	reporter_id int references "user"(id),
+	reported_id int references "user"(id),
+	reason text,
+	date timestamp
+);
+
+
+
