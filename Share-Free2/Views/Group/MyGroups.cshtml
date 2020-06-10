@@ -16,40 +16,75 @@
         @{
             // I don't know how to list all the groups, where the user is in
 
+            string username = Context.User.FindFirst("Username").Value.ToString();
             int userId = Convert.ToInt32(Context.User.FindFirst("Id").Value.ToString());
-            List<UserGroup> myGroups = gService.UserGroups(userId); 
+            List<Group> myGroups = gService.UserGroups(userId, username);
             // HIBA - 0 count
 
-            foreach (var group in myGroups)
+            foreach (var myGroup in myGroups)
             {
                 <li>
-                    <p>Group Name: @group.GroupName</p>
+                    <p>Group Name: @myGroup.Name</p>
+
+                    <button onclick="leaveGroup()">Leave Group</button>
                 </li>
             }
         }
     </ul>
-</div>
-
-<div>
     <h2>Available Groups</h2>
 
     <ul>
 
         @{
-            List<Group> availableGroups = gService.GetAllGroups();
+            List<Group> allGroups = gService.GetAllGroups();
             int userId2 = Convert.ToInt32(Context.User.FindFirst("Id").Value.ToString());
-            foreach (var group in availableGroups)
+            /*foreach (var group in allGroups)
             {
-                <li>
-                    <p>Group Name: @group.Name</p>
-                    <input id="groupId" type="number" name="groupId" value="@group.Id" hidden /> @*Doesn't show correct groupId*@
-                    <input id="userId" type="number" name="userId" value="@userId2" hidden />
-                    <button onclick="joinGroup()">Join Group</button>
-                </li>
-        }
+                foreach (var myGroup in myGroups)
+                {
+                    if (group.Name != myGroup.Name)
+                    {
+                        <li>
+                            <p>Group Name: @group.Name</p>
+                            
+                            <button onclick="joinGroup()">Join Group</button>
+                        </li>
+                    }
+                }
+            }*/
+            List<string> allgroupsName = new List<string>();
+            List<string> mygroupsName = new List<string>();
+            for (int i = 0; i < allGroups.Count; i++)
+            {
+                allgroupsName.Add(allGroups[i].Name);
+            }
+            for (int i = 0; i < myGroups.Count; i++)
+            {
+                mygroupsName.Add(myGroups[i].Name);
+            }
+            var availableGroups = allgroupsName.Except(mygroupsName);
+            foreach (var group in allGroups)
+            {
+                foreach (var availableGroupName in availableGroups)
+                {
+                    if (availableGroupName == group.Name)
+                    {
+                        <li>
+                            <p>Group Name: @group.Name</p>
+                            <input id="groupId" type="number" name="groupId" value="@group.Id" hidden />
+                            <input id="userId" type="number" name="userId" value="@userId2" hidden />
+                            <button onclick="joinGroup()">Join Group</button>
+                        </li>
+                    }
+                }
+            }
 
         }
     </ul>
+</div>
+
+<div>
+    
 </div>
 
 @{ /* Join group = button, onclick -> XHR(POST) -> insert username

@@ -1,6 +1,8 @@
 ﻿
 
+function leaveGroup() {
 
+}
 
 
 function joinGroup() {

@@ -34,28 +34,63 @@ namespace Sharing_Free.Services
 
 
         // returns the groups the user is in
-        public List<UserGroup> UserGroups(int userId)
+        //public List<UserGroup> UserGroups(int userId, string username)
+        //{
+        //    List<UserGroup> userGroups = new List<UserGroup>();
+        //    using (var conn = new NpgsqlConnection(Program.ConnectionString))
+        //    {
+        //        conn.Open();
+        //        using (var cmd = new NpgsqlCommand("select distinct u.username, \"group\".group_name from \"group\" inner join user_group as ug on ug.group_id = \"group\".group_id inner join \"user\" as u on ug.user_id = @userId where u.username = @username order by \"group\".group_name,  u.username asc; ", conn))
+        //        {
+        //            cmd.Parameters.AddWithValue("userId", userId);
+        //            cmd.Parameters.AddWithValue("username", username);
+        //            string groupName = "";
+        //            string userName = "";
+
+
+
+        //            var reader = cmd.ExecuteReader();
+        //            while (reader.Read())
+        //            {
+        //                try
+        //                {
+        //                    // name it as you see it PgAdmin
+        //                    groupName = reader["group_name"].ToString();
+        //                    userName = reader["username"].ToString();
+        //                    userGroups.Add(new UserGroup(userName, groupName));
+        //                }
+        //                catch (Exception ex)
+        //                {
+        //                    Console.WriteLine(ex.Message);
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return userGroups;
+        //}
+
+
+        // function as above, using GROUP instead of UserGroup
+        public List<Group> UserGroups(int userId, string username)
         {
-            List<UserGroup> userGroups = new List<UserGroup>();
+            List<Group> userGroups = new List<Group>();
             using (var conn = new NpgsqlConnection(Program.ConnectionString))
             {
                 conn.Open();
-                using (var cmd = new NpgsqlCommand("select distinct u.username, gr.\"name\" from \"group\" as gr inner join user_group as ug on ug.group_id = gr.group_id inner join \"user\" as u on ug.user_id = @userId order by gr.\"name\",  u.username asc; ", conn))
+                using (var cmd = new NpgsqlCommand("select distinct u.username, \"group\".group_name from \"group\" inner join user_group as ug on ug.group_id = \"group\".group_id inner join \"user\" as u on ug.user_id = @userId where u.username = @username order by \"group\".group_name,  u.username asc; ", conn))
                 {
+                    cmd.Parameters.AddWithValue("username", username);
                     cmd.Parameters.AddWithValue("userId", userId);
                     string groupName = "";
-                    string userName = "";
-
-
 
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
                         try
                         {
-                            groupName = reader["gr.name"].ToString();
-                            userName = reader["u.username"].ToString();
-                            userGroups.Add(new UserGroup(userName, groupName));
+                            // name it as you see it PgAdmin
+                            groupName = reader["group_name"].ToString();
+                            userGroups.Add(new Group(groupName));
                         }
                         catch (Exception ex)
                         {
@@ -75,19 +110,18 @@ namespace Sharing_Free.Services
             using (var conn = new NpgsqlConnection(Program.ConnectionString))
             {
                 conn.Open();
-                using (var cmd = new NpgsqlCommand("select distinct * from \"group\"order by \"name\" asc", conn))
+                using (var cmd = new NpgsqlCommand("select distinct * from \"group\" order by group_name asc", conn))
                 {
 
                     int id = 0;
                     string name = "";
-                    string username = "";
                     List<string> usernames = new List<string>();
 
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
                         id = Convert.ToInt32(reader["group_id"]);
-                        name = reader["name"].ToString();
+                        name = reader["group_name"].ToString();
                         allGroups.Add(new Group(id, name));
                     }
                 }

@@ -31,10 +31,10 @@ namespace Share_Free.Controllers
         public IActionResult MyGroups()
         {
             GroupService gService = new GroupService();
-            List<UserGroup> myGroups = new List<UserGroup>();
+            List<Group> myGroups = new List<Group>();
             int userId = Convert.ToInt32(HttpContext.User.FindFirst("Id").Value);
-
-            myGroups = gService.UserGroups(userId);
+            string username = HttpContext.User.FindFirst("Username").Value.ToString();
+            myGroups = gService.UserGroups(userId, username);
 
             return View();
         }

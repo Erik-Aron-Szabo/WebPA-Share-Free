@@ -43,7 +43,7 @@ create table "comment"(
 --group
 create table "group"(
 	group_id serial primary key,
-	"name" varchar(18)
+	group_name varchar(18)
 );
 
 -- junction table N:M (user:group)
@@ -101,11 +101,11 @@ values('Peter', 'Yes! Nice!', '2020-06-02 13:13:00', 2);
 
 
 --groups
-insert into "group"("name")
+insert into "group"(group_name)
 values('Group-1');
-insert into "group"("name")
+insert into "group"(group_name)
 values('Group-2');
-insert into "group"("name")
+insert into "group"(group_name)
 values('Group-3');
 
 
@@ -127,13 +127,18 @@ values(3,2);
 
 --Use this Jun 7 
 
-select u.username, gr."name" from "group" as gr
+select distinct u.username, gr."group_name" from "group" as gr
 	inner join user_group as ug
 	on ug.group_id = gr.group_id
 	inner join "user" as u
-	on ug.user_id = u.user_id;
+	on ug.user_id = u.user_id
+order by gr."group_name",  u.username asc;
 
+select distinct u.username, \"group\".group_name from \"group\" inner join user_group as ug on ug.group_id = \"group\".group_id inner join \"user\" as u on ug.user_id = @userId order by \"group\".group_name,  u.username asc;
 
-
-
+select distinct u.username, "group".group_name 
+from "group" 
+inner join user_group as ug on ug.group_id = "group".group_id 
+inner join "user" as u on ug.user_id = @userId 
+order by "group".group_name,  u.username asc;
 

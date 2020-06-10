@@ -16,6 +16,11 @@ namespace Share_Free.Domain
 
         }
 
+        public Group(string name)
+        {
+            Name = name;
+        }
+
         public Group(int id, string name)
         {
             Id = id;

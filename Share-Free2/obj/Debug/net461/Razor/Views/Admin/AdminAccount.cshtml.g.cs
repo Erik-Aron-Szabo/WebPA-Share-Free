@@ -62,7 +62,7 @@ using Share_Free.Models;
             WriteLiteral("\r\n    \r\n\r\n<h2>Admin\'s Account Page</h2>\r\n\r\n<!-- Here should come something asynchronous xhr...-->\r\n<!-- Like, getting all Users list-->\r\n");
             EndContext();
             BeginContext(187, 1477, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f4620aa26dc141e1abb822c86e48bba0", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cddcc03935d041149a4f7a3f07d63096", async() => {
                 BeginContext(193, 1464, true);
                 WriteLiteral(@"
     <div class=""allUser"">

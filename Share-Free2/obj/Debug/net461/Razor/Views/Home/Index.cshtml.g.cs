@@ -74,12 +74,12 @@ using Sharing_Free.Domain;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             BeginContext(22, 63, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7f874247650f43e8b2e8c1980351e9ee", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7802676df7ff497b9f0098bb370abe46", async() => {
                 BeginContext(28, 6, true);
                 WriteLiteral("\r\n    ");
                 EndContext();
                 BeginContext(34, 42, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "12b5725434b84527ac8ea91b0a89243a", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "46bf44e944bf4022ae664684aa98e59a", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -124,7 +124,7 @@ using Sharing_Free.Domain;
             WriteLiteral("<!--Search bar-->\r\n<h3>Welcome!</h3>\r\n\r\n<!-- The Posts -->\r\n<h1>Posts</h1>\r\n<h5>New Post</h5>\r\n<div class=\"createpost\">\r\n    ");
             EndContext();
             BeginContext(315, 299, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "689c1ec693d14a5181f3a28db45ffc84", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d52df92b83d141f9b627fad9b321c537", async() => {
                 BeginContext(381, 226, true);
                 WriteLiteral("\r\n        <label>Title:</label>\r\n        <input type=\"text\" name=\"title\" />\r\n\r\n        <label>Description:</label>\r\n        <input type=\"text\" name=\"description\" />\r\n\r\n        <input type=\"submit\" value=\"CreatePost\" />\r\n\r\n    ");
                 EndContext();
@@ -152,7 +152,7 @@ using Sharing_Free.Domain;
             WriteLiteral("\r\n</div>\r\n<h5>Delete Post</h5>\r\n<div>\r\n    ");
             EndContext();
             BeginContext(657, 207, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9389df7b34b243b7839e71ffd92076d8", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a6c4fc9ba7864f07949e6177643e2d9f", async() => {
                 BeginContext(723, 134, true);
                 WriteLiteral("\r\n        <label>ID:</label>\r\n        <input type=\"number\" name=\"postId\" />\r\n        <input type=\"submit\" value=\"Delete Post\" />\r\n    ");
                 EndContext();
@@ -180,7 +180,7 @@ using Sharing_Free.Domain;
             WriteLiteral("\r\n</div>\r\n<h5>Modify Post</h5>\r\n<div>\r\n    ");
             EndContext();
             BeginContext(907, 371, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "385686334dfe4572b4e8e5c9376398ba", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f845f4ed054046f18c8ee9d4c5add449", async() => {
                 BeginContext(973, 298, true);
                 WriteLiteral(@"
         <label>ID:</label>
@@ -337,7 +337,7 @@ using Sharing_Free.Domain;
             WriteLiteral("                    </ul>\r\n\r\n                    <h5>New Comment</h5>\r\n                    <div>\r\n                        ");
             EndContext();
             BeginContext(3137, 425, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "af43445277fc4da5b9e3a9f850be4ba6", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "955016a034e7434ebbfe4660bf72c332", async() => {
                 BeginContext(3209, 190, true);
                 WriteLiteral("\r\n                            <label>Message:</label>\r\n                            <input type=\"text\" name=\"message\" />\r\n                            <input type=\"number\" name=\"postId\" hidden");
                 EndContext();
@@ -378,7 +378,7 @@ WriteAttributeValue("", 3407, post.Id, 3407, 8, false);
             WriteLiteral("\r\n                    </div>\r\n\r\n                    <h5>Delete Comment</h5>\r\n                    <div>\r\n                        ");
             EndContext();
             BeginContext(3690, 299, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "948fd80595b047809cfdfba71f51b403", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "774f622572eb4c21b324de532daceab8", async() => {
                 BeginContext(3762, 220, true);
                 WriteLiteral("\r\n                            <label>ID:</label>\r\n                            <input type=\"number\" name=\"commentId\" />\r\n                            <input type=\"submit\" value=\"Delete Comment\" />\r\n                        ");
                 EndContext();
@@ -406,7 +406,7 @@ WriteAttributeValue("", 3407, post.Id, 3407, 8, false);
             WriteLiteral("\r\n                    </div>\r\n\r\n                    <h5>Modify Comment</h5>\r\n                    <div>\r\n                        ");
             EndContext();
             BeginContext(4117, 420, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "57649e66731a4d12b6aa3454d7e1b93f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "81e3d24d3e7d49ba8c428a97e0d16f5b", async() => {
                 BeginContext(4189, 341, true);
                 WriteLiteral(@"
                             <label>ID:</label>
