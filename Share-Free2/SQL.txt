@@ -139,6 +139,18 @@ select distinct u.username, \"group\".group_name from \"group\" inner join user_
 select distinct u.username, "group".group_name 
 from "group" 
 inner join user_group as ug on ug.group_id = "group".group_id 
-inner join "user" as u on ug.user_id = @userId 
+inner join "user" as u on ug.user_id = 1
+where u.username = 'Erik121'
 order by "group".group_name,  u.username asc;
 
+-- leaveGroup
+select distinct u.username, "group".group_name, "group".group_id 
+from "group" 
+inner join user_group as ug on ug.group_id = "group".group_id 
+inner join "user" as u on ug.user_id = 1
+where u.username = 'Erik121'
+order by "group".group_name,  u.username asc;
+
+
+delete from user_group
+where user_group.user_id = 1 and user_group.group_id = 1;

@@ -22,10 +22,11 @@ namespace Share_Free.Controllers
         {
             CommentService cService = new CommentService();
             string username = HttpContext.User.FindFirst("Username").Value.ToString();
-            List<Comment> userComments = cService.GetAllCommentsFromUser(username);
+            bool isAdmin = Convert.ToBoolean(HttpContext.User.FindFirst("IsAdmin").Value.ToString());
+            List<Comment> userComments = cService.GetAllComments();
             foreach (var comment in userComments)
             {
-                if (username == comment.Username && commentId == comment.Id)
+                if ((username == comment.Username || isAdmin == true) && commentId == comment.Id )
                 {
                     cService.ModifyComment(message, commentId);
                     break;
@@ -53,10 +54,11 @@ namespace Share_Free.Controllers
         {
             CommentService cService = new CommentService();
             string username = HttpContext.User.FindFirst("Username").Value.ToString();
-            List<Comment> userComments = cService.GetAllCommentsFromUser(username);
-            foreach (var comment in userComments)
+            bool isAdmin = Convert.ToBoolean(HttpContext.User.FindFirst("IsAdmin").Value.ToString());
+            List<Comment> allComments = cService.GetAllComments();
+            foreach (var comment in allComments)
             {
-                if (username == comment.Username && commentId == comment.Id)
+                if ((username == comment.Username || isAdmin == true) && commentId == comment.Id)
                 {
                     cService.DeleteComment(commentId);
                     break;

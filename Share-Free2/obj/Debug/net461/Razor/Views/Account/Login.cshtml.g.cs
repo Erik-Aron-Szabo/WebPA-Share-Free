@@ -64,7 +64,7 @@ using Share_Free.Models;
             WriteLiteral("\r\n<h2>Login</h2>\r\n\r\n");
             EndContext();
             BeginContext(63, 224, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1da845f9f93e49ba93784e917cd4a38b", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "72c0ec84144243058cf4f860ed04f1de", async() => {
                 BeginContext(83, 197, true);
                 WriteLiteral("\r\n    <label>Username</label>\r\n    <input type=\"text\" name=\"username\" />\r\n\r\n    <label>Password</label>\r\n    <input type=\"password\" name=\"password\" />\r\n\r\n    <input type=\"submit\" value=\"Login\" />\r\n");
                 EndContext();

@@ -79,6 +79,7 @@ namespace Share_Free.Controllers
                             new ClaimsPrincipal(new ClaimsIdentity(new List<Claim>
                             {
                                 new Claim("Username", identifiedUser.Username),
+                                new Claim("IsAdmin", identifiedUser.IsAdmin.ToString()),
                                 new Claim("Id", identifiedUser.Id.ToString())
                             }, CookieAuthenticationDefaults.AuthenticationScheme)),
                             new AuthenticationProperties());

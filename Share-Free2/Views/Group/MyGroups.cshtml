@@ -8,93 +8,91 @@
 @using Share_Free.Controllers;
 <head>
     <script src="~/js/Group.js" defer></script>
+    <link href="~/css/group.css" rel="stylesheet" />
 </head>
 @{GroupService gService = new GroupService(); }
-<div>
-    <h2>MyGroups</h2>
-    <ul>
-        @{
-            // I don't know how to list all the groups, where the user is in
+<h2>MyGroups</h2>
+<div id="myGroups_div">
 
-            string username = Context.User.FindFirst("Username").Value.ToString();
-            int userId = Convert.ToInt32(Context.User.FindFirst("Id").Value.ToString());
-            List<Group> myGroups = gService.UserGroups(userId, username);
-            // HIBA - 0 count
+    @{
+        // I don't know how to list all the groups, where the user is in
 
-            foreach (var myGroup in myGroups)
-            {
-                <li>
-                    <p>Group Name: @myGroup.Name</p>
+        string username = Context.User.FindFirst("Username").Value.ToString();
+        int userId = Convert.ToInt32(Context.User.FindFirst("Id").Value.ToString());
+        List<Group> myGroups = gService.UserGroups(userId, username);
 
-                    <button onclick="leaveGroup()">Leave Group</button>
-                </li>
-            }
-        }
-    </ul>
-    <h2>Available Groups</h2>
-
-    <ul>
-
-        @{
-            List<Group> allGroups = gService.GetAllGroups();
-            int userId2 = Convert.ToInt32(Context.User.FindFirst("Id").Value.ToString());
-            /*foreach (var group in allGroups)
-            {
-                foreach (var myGroup in myGroups)
-                {
-                    if (group.Name != myGroup.Name)
-                    {
-                        <li>
-                            <p>Group Name: @group.Name</p>
-                            
-                            <button onclick="joinGroup()">Join Group</button>
-                        </li>
-                    }
-                }
-            }*/
-            List<string> allgroupsName = new List<string>();
-            List<string> mygroupsName = new List<string>();
-            for (int i = 0; i < allGroups.Count; i++)
-            {
-                allgroupsName.Add(allGroups[i].Name);
-            }
-            for (int i = 0; i < myGroups.Count; i++)
-            {
-                mygroupsName.Add(myGroups[i].Name);
-            }
-            var availableGroups = allgroupsName.Except(mygroupsName);
-            foreach (var group in allGroups)
-            {
-                foreach (var availableGroupName in availableGroups)
-                {
-                    if (availableGroupName == group.Name)
-                    {
-                        <li>
-                            <p>Group Name: @group.Name</p>
-                            <input id="groupId" type="number" name="groupId" value="@group.Id" hidden />
-                            <input id="userId" type="number" name="userId" value="@userId2" hidden />
-                            <button onclick="joinGroup()">Join Group</button>
-                        </li>
-                    }
-                }
-            }
+        foreach (var myGroup in myGroups)
+        {
+            <div class="myGroup" id="mygroupdiv_@myGroup.Id">
+                <p>Group Name: @myGroup.Name</p>
+                <input id="groupIdLeave_@myGroup.Id" type="number" name="groupIdLeave" value="@myGroup.Id" hidden />
+                <input id="userIdLeave" type="number" name="userIdLeave" value="@userId" hidden />
+                <button onclick="leaveGroup(@myGroup.Id)">Leave Group (doesn't work)</button>
+            </div>
 
         }
-    </ul>
+    }
+</div>
+
+<h2>Available Groups</h2>
+<div id="availableGroup_div">
+
+    @{
+        List<Group> allGroups = gService.GetAllGroups();
+        int userId2 = Convert.ToInt32(Context.User.FindFirst("Id").Value.ToString());
+
+        List<string> allgroupsName = new List<string>();
+        List<string> mygroupsName = new List<string>();
+        for (int i = 0; i < allGroups.Count; i++)
+        {
+            allgroupsName.Add(allGroups[i].Name);
+        }
+        for (int i = 0; i < myGroups.Count; i++)
+        {
+            mygroupsName.Add(myGroups[i].Name);
+        }
+        var availableGroups = allgroupsName.Except(mygroupsName);
+        foreach (var group in allGroups)
+        {
+            foreach (var availableGroupName in availableGroups)
+            {
+                if (availableGroupName == group.Name)
+                {
+                    <div class="availableGroups" id="availablegroupsdiv_@group.Id">
+                        <p>Group Name: @group.Name</p>
+                        <input id="userId" type="number" name="userId" value="@userId2" hidden />
+                        <input id="groupId_@group.Id" type="number" name="groupId" value="@group.Id" hidden />
+
+                        <button onclick="joinGroup(@group.Id)">Join Group</button>
+
+                    </div>
+                }
+
+            }
+        }
+
+    }
 </div>
 
 <div>
-    
+    <h4>Leave Group</h4>
+
+    <form asp-controller="Group" asp-action="LeaveGroup" method="post">
+        <label>ID:</label>
+        <input type="number" name="groupIdLeave" />
+        <input id="userIdLeave" type="number" name="userIdLeave" value="@userId" hidden />
+        <input type="submit" value="Leave Group" />
+    </form>
 </div>
 
 @{ /* Join group = button, onclick -> XHR(POST) -> insert username
-     * into group table (POSTGRES)
-     * refresh my groups, or the page, and it will show user joined
-     * in the choosen group
-     --------------------------------------------------------
-     Same with Leave group,
-     button (leave) onclick -> XHR (POST) -> delete from group,
-     where username = @username? Can this work in an ARRAY?
-     */
+        * into group table (POSTGRES)
+        * refresh my groups, or the page, and it will show user joined
+        * in the choosen group
+        --------------------------------------------------------
+        Same with Leave group,
+        button (leave) onclick -> XHR (POST) -> delete from group,
+        where username = @username? Can this work in an ARRAY?
+        */
 }
 

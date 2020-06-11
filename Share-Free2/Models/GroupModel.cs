@@ -12,5 +12,15 @@ namespace Share_Free.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public GroupModel(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
+        public GroupModel()
+        {
+        }
     }
 }

@@ -33,10 +33,11 @@ namespace Share_Free.Controllers
 
 
             string username = HttpContext.User.FindFirst("Username").Value.ToString();
-            List<Post> userPosts = pService.GetAllPostsFromUser(username);
+            bool isAdmin = Convert.ToBoolean(HttpContext.User.FindFirst("IsAdmin").Value.ToString());
+            List<Post> userPosts = pService.GetAllPosts();
             foreach (var post in userPosts)
             {
-                if (username == post.Username && postId == post.Id)
+                if ((username == post.Username || isAdmin == true) && postId == post.Id)
                 {
                     pService.DeletePost(postId);
                     break;
@@ -51,10 +52,11 @@ namespace Share_Free.Controllers
             PostService pService = new PostService();
 
             string username = HttpContext.User.FindFirst("Username").Value.ToString();
-            List<Post> userPosts = pService.GetAllPostsFromUser(username);
+            bool isAdmin = Convert.ToBoolean(HttpContext.User.FindFirst("IsAdmin").Value.ToString());
+            List<Post> userPosts = pService.GetAllPosts();
             foreach (var post in userPosts)
             {
-                if (username == post.Username && postId == post.Id)
+                if ((username == post.Username || isAdmin == true) && postId == post.Id)
                 {
                     pService.ModifyPost(postId, title, description);
                     break;
