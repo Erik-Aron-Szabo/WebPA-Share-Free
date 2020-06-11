@@ -29,7 +29,14 @@ namespace Share_Free.Controllers
         [HttpGet]
         public IActionResult AdminAccount()
         {
+            bool isAdmin = Convert.ToBoolean(HttpContext.User.FindFirst("IsAdmin").Value.ToString());
+            if (isAdmin == false)
+            {
+                Console.WriteLine("You are not authorized to access Admin page!");
+                return RedirectToAction("Index", "Home");
+            }
             return View();
+
         }
 
 
