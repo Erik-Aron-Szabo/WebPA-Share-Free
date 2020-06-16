@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+//using System.Web.Http;
+// using System.Web.Http;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Share_Free.Services;
@@ -10,24 +12,47 @@ using Sharing_Free.Domain;
 
 namespace Share_Free.Controllers
 {
+
     [Authorize]
+    [Route("[controller]")]
     public class PostController : Controller
     {
 
-        //[Authorize]
-        //[HttpPost]
-        //public IActionResult CreatePost([FromForm(Name = "title")] string title, [FromForm(Name = "description")] string description)
-        //{
-        //    string username = HttpContext.User.FindFirst("Username").ToString();
-        //    PostService pService = new PostService();
+        [HttpGet("[action]")]
+        public IEnumerable<Post> CreatePost()
+        {
+            Post createdPost = new Post();
+            PostService pService = new PostService();
 
-        //    pService.CreatePost(username, title, description);
 
-        //    return RedirectToAction("Index", "Home");
-        //}
+            List<Post> getCreatePost = pService.GetAllPosts();
+            List<Post> returnPost = new List<Post>();
 
-        [HttpPost]
-        public IActionResult DeletePost([FromForm(Name = "postId")] int postId)
+            for (int i = 0; i < getCreatePost.Count; i++)
+            {
+                var getCpost = getCreatePost[i];
+
+                if (i > 1 && getCpost.Id > getCreatePost[i-1].Id)
+                {
+                    Post createdPost2 = new Post(getCpost.Id, getCpost.Username, getCpost.Title, getCpost.Description, getCpost.Date);
+                    returnPost.Add(createdPost2);
+                }
+            }
+            return returnPost;
+        }
+
+        [HttpPost("[action]")]
+        public void CreatePost([FromForm(Name = "title")] string title, [FromForm(Name = "description")] string description)
+        {
+            string username = HttpContext.User.FindFirst("Username").ToString();
+            PostService pService = new PostService();
+
+            pService.CreatePost(username, title, description);
+
+        }
+
+        [HttpPost("[action]")]
+        public IActionResult DeletePost([FromForm] int PostId)
         {
             PostService pService = new PostService();
 
@@ -37,17 +62,17 @@ namespace Share_Free.Controllers
             List<Post> userPosts = pService.GetAllPosts();
             foreach (var post in userPosts)
             {
-                if ((username == post.Username || isAdmin == true) && postId == post.Id)
+                if ((username == post.Username || isAdmin == true) && PostId == post.Id)
                 {
-                    pService.DeletePost(postId);
+                    pService.DeletePost(PostId);
                     break;
                 }
             }
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpPost]
-        public IActionResult ModifyPost([FromForm(Name = "postId")] int postId, [FromForm(Name = "title")] string title, [FromForm(Name = "description")] string description)
+        [HttpPost("[action]")]
+        public IActionResult ModifyPost([FromForm] int modifyPostId, [FromForm] string modifyPostTitle, [FromForm] string modifyPostDescription)
         {
             PostService pService = new PostService();
 
@@ -56,9 +81,9 @@ namespace Share_Free.Controllers
             List<Post> userPosts = pService.GetAllPosts();
             foreach (var post in userPosts)
             {
-                if ((username == post.Username || isAdmin == true) && postId == post.Id)
+                if ((username == post.Username || isAdmin == true) && modifyPostId == post.Id)
                 {
-                    pService.ModifyPost(postId, title, description);
+                    pService.ModifyPost(modifyPostId, modifyPostTitle, modifyPostDescription);
                     break;
                 }
             }

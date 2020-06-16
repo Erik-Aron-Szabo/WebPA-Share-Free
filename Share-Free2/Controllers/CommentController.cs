@@ -9,6 +9,7 @@ using Share_Free.Services;
 
 namespace Share_Free.Controllers
 {
+    [Route("[controller]")]
     [Authorize]
     public class CommentController : Controller
     {
@@ -17,7 +18,7 @@ namespace Share_Free.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("[action]")]
         public IActionResult ModifyComment([FromForm] string message, [FromForm] int commentId)
         {
             CommentService cService = new CommentService();
@@ -37,7 +38,7 @@ namespace Share_Free.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("[action]")]
         public IActionResult CreateComment([FromForm(Name = "message")] string message, [FromForm(Name = "postId")] int postId)
         {
             // username missing
@@ -49,8 +50,8 @@ namespace Share_Free.Controllers
         }
 
 
-        [HttpPost]
-        public IActionResult DeleteComment([FromForm] int commentId)
+        [HttpPost("[action]")]
+        public void DeleteComment([FromForm] int commentId)
         {
             CommentService cService = new CommentService();
             string username = HttpContext.User.FindFirst("Username").Value.ToString();
@@ -61,10 +62,8 @@ namespace Share_Free.Controllers
                 if ((username == comment.Username || isAdmin == true) && commentId == comment.Id)
                 {
                     cService.DeleteComment(commentId);
-                    break;
                 }
             }
-            return RedirectToAction("Index", "Home");
         }
 
 

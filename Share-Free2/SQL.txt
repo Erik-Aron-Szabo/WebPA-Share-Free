@@ -120,6 +120,12 @@ insert into user_group(group_id, user_id)
 values(1,4);
 insert into user_group(group_id, user_id)
 values(3,2);
+insert into user_group(group_id, user_id)
+values(2,3);
+insert into user_group(group_id, user_id)
+values(1,4);
+insert into user_group(group_id, user_id)
+values(1,2);
 
 
 
@@ -154,3 +160,13 @@ order by "group".group_name,  u.username asc;
 
 delete from user_group
 where user_group.user_id = 1 and user_group.group_id = 1;
+
+
+---------------------------------------------
+
+select  u.username, "group".group_name, "group".group_id 
+from "group" 
+inner join user_group as ug on ug.group_id = "group".group_id 
+inner join "user" as u on ug.user_id = u.user_id
+
+order by "group".group_name,  u.username asc;

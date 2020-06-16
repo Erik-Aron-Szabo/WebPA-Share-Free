@@ -27,9 +27,8 @@
                 <p>Group Name: @myGroup.Name</p>
                 <input id="groupIdLeave_@myGroup.Id" type="number" name="groupIdLeave" value="@myGroup.Id" hidden />
                 <input id="userIdLeave" type="number" name="userIdLeave" value="@userId" hidden />
-                <button onclick="leaveGroup(@myGroup.Id)">Leave Group (doesn't work)</button>
+                <button onclick="leaveGroup(@myGroup.Id)">Leave Group</button>
             </div>
-
         }
     }
 </div>
@@ -86,13 +85,15 @@
 </div>
 
 @{ /* Join group = button, onclick -> XHR(POST) -> insert username
-        * into group table (POSTGRES)
-        * refresh my groups, or the page, and it will show user joined
-        * in the choosen group
-        --------------------------------------------------------
-        Same with Leave group,
-        button (leave) onclick -> XHR (POST) -> delete from group,
-        where username = @username? Can this work in an ARRAY?
-        */
+         * into group table (POSTGRES)
+         * refresh my groups, or the page, and it will show user joined
+         * in the choosen group
+         --------------------------------------------------------
+         Same with Leave group,
+         button (leave) onclick -> XHR (POST) -> delete from group,
+         where username = @username? Can this work in an ARRAY?
+         */
 }
+
+
 

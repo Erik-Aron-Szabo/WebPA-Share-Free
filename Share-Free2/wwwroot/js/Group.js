@@ -33,7 +33,7 @@ function leaveGroup(groupId) {
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/Group/LeaveGroup");
-    xhr.onload = function () {
+    xhr.onreadystatechange = function () {
 
         if (xhr.status == 200) {
             console.log("Status: " + xhr.status)
@@ -43,14 +43,8 @@ function leaveGroup(groupId) {
             alert("Please try again (Error message)");
         }
     }
-    //xhr.onreadystatechange = () => {
-    //    if (this.status == 200) {
-    //        moveGroups();
-    //    } else {
-    //        alert("Please try again (Error message)");
-    //    }
-    //}
     xhr.send(data);
+
     location.reload();
 }
 

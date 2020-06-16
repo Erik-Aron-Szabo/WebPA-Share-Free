@@ -364,10 +364,12 @@ C:\CodeCool\Web\PA\Share-Free2\bin\Debug\net461\Microsoft.Bcl.AsyncInterfaces.dl
 C:\CodeCool\Web\PA\Share-Free2\bin\Debug\net461\Npgsql.dll
 C:\CodeCool\Web\PA\Share-Free2\bin\Debug\net461\System.Text.Json.dll
 C:\CodeCool\Web\PA\Share-Free2\obj\Debug\net461\Razor\Views\Home\MyGroups.cshtml.g.cs
-C:\CodeCool\Web\PA\Share-Free2\obj\Debug\net461\Share_Free.csproj.CoreCompileInputs.cache
 C:\CodeCool\Web\PA\Share-Free2\bin\Debug\net461\Microsoft.AspNetCore.Authentication.dll
 C:\CodeCool\Web\PA\Share-Free2\bin\Debug\net461\Microsoft.AspNetCore.Authentication.Cookies.dll
 C:\CodeCool\Web\PA\Share-Free2\obj\Debug\net461\Razor\Views\Account\Login.cshtml.g.cs
 C:\CodeCool\Web\PA\Share-Free2\obj\Debug\net461\Razor\Views\Admin\AdminAccount.cshtml.g.cs
 C:\CodeCool\Web\PA\Share-Free2\obj\Debug\net461\Razor\Views\Group\MyGroups.cshtml.g.cs
 C:\CodeCool\Web\PA\Share-Free2\obj\Debug\net461\Razor\Views\Account\MyAccount.cshtml.g.cs
+C:\CodeCool\Web\PA\Share-Free2\bin\Debug\net461\System.Net.Http.Formatting.dll
+C:\CodeCool\Web\PA\Share-Free2\bin\Debug\net461\System.Web.Http.dll
+C:\CodeCool\Web\PA\Share-Free2\obj\Debug\net461\Share_Free.csproj.CoreCompileInputs.cache

@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "rmyfS+iafF2jJ/R1jFxzsw7Z6U+kjD9zaFwkVJ239Wjd9pjLrpiUKrfKJntJmnkqH+Sfvfy8y8v5V8rq+U31uw==",
+  "dgSpecHash": "wph15kr7hUjlSEF8jiMaqfgMzi9DQ/BfXc2jERuH3FYxQuQBsjF/Iv50Kmg4Py8ZW8VOJ7Aoe3C5NycLczPctg==",
   "success": true,
   "projectFilePath": "C:\\CodeCool\\Web\\PA\\Share-Free2\\Share_Free.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\erika\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
+    "C:\\Users\\erika\\.nuget\\packages\\microsoft.aspnet.webapi.core\\5.2.7\\microsoft.aspnet.webapi.core.5.2.7.nupkg.sha512",
     "C:\\Users\\erika\\.nuget\\packages\\microsoft.aspnetcore\\2.1.7\\microsoft.aspnetcore.2.1.7.nupkg.sha512",
     "C:\\Users\\erika\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.1.1\\microsoft.aspnetcore.antiforgery.2.1.1.nupkg.sha512",
     "C:\\Users\\erika\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
